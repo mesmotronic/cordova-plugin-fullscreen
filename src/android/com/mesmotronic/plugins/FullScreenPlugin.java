@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class FullScreen extends CordovaPlugin
+public class FullScreenPlugin extends CordovaPlugin
 {
 	public static final String ACTION_IS_SUPPORTED = "isSupported";
 	public static final String ACTION_IS_IMMERSIVE_MODE_SUPPORTED = "isImmersiveModeSupported";
@@ -85,13 +85,13 @@ public class FullScreen extends CordovaPlugin
 			
 	        PluginResult res = new PluginResult(PluginResult.Status.OK, outSize.x);
 	        callback.sendPluginResult(res);
+			return true;
 		}
-		catch (Exception e0)
+		catch (Exception e)
 		{
+			callback.error(e.getMessage());
 			return false;
 		}
-		
-		return true;
 	}
 	
 	/**
@@ -107,13 +107,13 @@ public class FullScreen extends CordovaPlugin
 			
 	        PluginResult res = new PluginResult(PluginResult.Status.OK, outSize.y);
 	        callback.sendPluginResult(res);
+			return true;
 		}
 		catch (Exception e)
 		{
+			callback.error(e.getMessage());
 			return false;
 		}
-		
-		return true;
 	}
 	
 	/**
@@ -123,6 +123,7 @@ public class FullScreen extends CordovaPlugin
 	{
 		if (!isSupported())
 		{
+			callback.error("Not supported");
 			return false;
 		}
 		
@@ -134,13 +135,15 @@ public class FullScreen extends CordovaPlugin
 			
 			decorView.setOnSystemUiVisibilityChangeListener(null);
 			decorView.setSystemUiVisibility(uiOptions);
+			
+			callback.success();
+			return true;
 		}
 		catch (Exception e)
 		{
+			callback.error(e.getMessage());
 			return false;
 		}
-		
-		return true;
 	}
 	
 	/**
@@ -150,6 +153,7 @@ public class FullScreen extends CordovaPlugin
 	{
 		if (!isSupported())
 		{
+			callback.error("Not supported");
 			return false;
 		}
 		
@@ -163,13 +167,18 @@ public class FullScreen extends CordovaPlugin
 	        
 			decorView.setOnSystemUiVisibilityChangeListener(null);
 			decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+			
+			PluginResult res = new PluginResult(PluginResult.Status.OK, true);
+	        callback.sendPluginResult(res);
+			
+			callback.success();
+			return true;
 		}
 		catch (Exception e)
 		{
+			callback.error(e.getMessage());
 			return false;
 		}
-		
-		return true;
 	}
 	
 	/**
@@ -179,6 +188,7 @@ public class FullScreen extends CordovaPlugin
 	{
 		if (!isSupported())
 		{
+			callback.error("Not supported");
 			return false;
 		}
 		
@@ -198,13 +208,15 @@ public class FullScreen extends CordovaPlugin
 			
 			decorView.setOnSystemUiVisibilityChangeListener(null);
 			decorView.setSystemUiVisibility(uiOptions);
+			
+			callback.success();
+			return true;
 		}
 		catch (Exception e)
 		{
+			callback.error(e.getMessage());
 			return false;
 		}
-		
-		return true;
 	}
 	
 	/**
@@ -222,6 +234,7 @@ public class FullScreen extends CordovaPlugin
 	{
 		if (!isImmersiveModeSupported())
 		{
+			callback.error("Not supported");
 			return false;
 		}
 		
@@ -253,13 +266,15 @@ public class FullScreen extends CordovaPlugin
 					}
 				});
 			}
+			
+			callback.success();
+			return true;
 		}
 		catch (Exception e)
 		{
+			callback.error(e.getMessage());
 			return false;
 		}
-		
-		return true;
 	}
 	
 }
