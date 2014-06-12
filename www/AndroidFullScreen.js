@@ -1,44 +1,54 @@
-'use strict';
-
-var AndroidFullScreen = 
+(function(window, undefined)
 {
-	isSupported: function(successFunction, errorFunction)
-	{
-		cordova.exec(successFunction, errorFunction, 'FullScreenPlugin', 'isSupported', []);
-	},
+	'use strict';
 
-	isImmersiveModeSupported: function(successFunction, errorFunction)
+	var AndroidFullScreen =
 	{
-		cordova.exec(successFunction, errorFunction, 'FullScreenPlugin', 'isImmersiveModeSupported', []);
-	},
+		isSupported: function(successFunction, errorFunction)
+		{
+			cordova.exec(successFunction, errorFunction, 'AndroidFullScreen', 'isSupported', []);
+		},
 
-	immersiveWidth: function(successFunction, errorFunction)
-	{
-		cordova.exec(successFunction, errorFunction, 'FullScreenPlugin', 'immersiveWidth', []);
-	},
+		isImmersiveModeSupported: function(successFunction, errorFunction)
+		{
+			cordova.exec(successFunction, errorFunction, 'AndroidFullScreen', 'isImmersiveModeSupported', []);
+		},
 
-	immersiveHeight: function(successFunction, errorFunction)
-	{
-		cordova.exec(successFunction, errorFunction, 'FullScreenPlugin', 'immersiveHeight', []);
-	},
+		immersiveWidth: function(successFunction, errorFunction)
+		{
+			cordova.exec(successFunction, errorFunction, 'AndroidFullScreen', 'immersiveWidth', []);
+		},
 
-	hideSystemUI: function(successFunction, errorFunction)
-	{
-		cordova.exec(successFunction, errorFunction, 'FullScreenPlugin', 'hideSystemUI', []);
-	},
+		immersiveHeight: function(successFunction, errorFunction)
+		{
+			cordova.exec(successFunction, errorFunction, 'AndroidFullScreen', 'immersiveHeight', []);
+		},
 
-	showSystemUI: function(successFunction, errorFunction)
-	{
-		cordova.exec(successFunction, errorFunction, 'FullScreenPlugin', 'showSystemUI', []);
-	},
+		hideSystemUI: function(successFunction, errorFunction)
+		{
+			cordova.exec(successFunction, errorFunction, 'AndroidFullScreen', 'hideSystemUI', []);
+		},
 
-	showUnderSystemUI: function(successFunction, errorFunction)
-	{
-		cordova.exec(successFunction, errorFunction, 'FullScreenPlugin', 'showUnderSystemUI', []);
-	},
+		showSystemUI: function(successFunction, errorFunction)
+		{
+			cordova.exec(successFunction, errorFunction, 'AndroidFullScreen', 'showSystemUI', []);
+		},
+
+		showUnderSystemUI: function(successFunction, errorFunction)
+		{
+			cordova.exec(successFunction, errorFunction, 'AndroidFullScreen', 'showUnderSystemUI', []);
+		},
+		
+		immersiveMode: function(isSticky, successFunction, errorFunction)
+		{
+			cordova.exec(successFunction, errorFunction, 'AndroidFullScreen', 'immersiveMode', [isSticky !== false]);
+		}
+	};
 	
-	immersiveMode: function(isSticky, successFunction, errorFunction)
+	cordova.addConstructor(function() 
 	{
-		cordova.exec(successFunction, errorFunction, 'FullScreenPlugin', 'immersiveMode', [isSticky !== false]);
-	}
-};
+		window.AndroidFullScreen = AndroidFullScreen;
+		return window.AndroidFullScreen;
+	});
+	
+})(window);
