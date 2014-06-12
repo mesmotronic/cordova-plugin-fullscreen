@@ -37,7 +37,7 @@ var AndroidFullScreen =
 		cordova.exec(successFunction, errorFunction, 'FullScreenPlugin', 'showUnderSystemUI', []);
 	},
 	
-	immersiveMode: function(successFunction, errorFunction, isSticky)
+	immersiveMode: function(isSticky, successFunction, errorFunction)
 	{
 		cordova.exec(successFunction, errorFunction, 'FullScreenPlugin', 'immersiveMode', [isSticky !== false]);
 	}
