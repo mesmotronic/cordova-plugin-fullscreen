@@ -39,9 +39,9 @@
 			cordova.exec(successFunction, errorFunction, 'AndroidFullScreen', 'showUnderSystemUI', []);
 		},
 		
-		immersiveMode: function(isSticky, successFunction, errorFunction)
+		immersiveMode: function(successFunction, errorFunction)
 		{
-			cordova.exec(successFunction, errorFunction, 'AndroidFullScreen', 'immersiveMode', [isSticky !== false]);
+			cordova.exec(successFunction, errorFunction, 'AndroidFullScreen', 'immersiveMode', []);
 		}
 	};
 	

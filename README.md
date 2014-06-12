@@ -3,7 +3,7 @@ Full Screen Plugin for Cordova
 
 Plugin for Cordova (or PhoneGap) 3.0+ to enable true full screen on Android, ported from our popular [ANE for Adobe AIR](https://github.com/mesmotronic/air-fullscreen-ane).
 
-**This plugin is currently in development and doesn't currently work**
+**This plugin is still experimental**
 
 How does it work?
 -----------------
@@ -71,10 +71,7 @@ AndroidFullScreen.showSystemUI(successFunction, errorFunction);
 AndroidFullScreen.showUnderSystemUI(successFunction, errorFunction);
 
 // Hide system UI and keep it hidden (Android 4.4+ only)
-AndroidFullScreen.immersiveMode(true, successFunction, errorFunction);
-
-// Hide system UI until user swipes from top (Android 4.4+ only)
-AndroidFullScreen.immersiveMode(false, successFunction, errorFunction);
+AndroidFullScreen.immersiveMode(successFunction, errorFunction);
 
 ```
 

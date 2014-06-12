@@ -6,6 +6,7 @@ import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import android.app.Activity;
 import android.graphics.Point;
 import android.os.Build;
 import android.view.View;
@@ -23,15 +24,17 @@ public class FullScreenPlugin extends CordovaPlugin
 	public static final String ACTION_SHOW_UNDER_SYSTEM_UI = "showUnderSystemUI";
 	public static final String ACTION_IMMERSIVE_MODE = "immersiveMode";
 	
-	private CallbackContext callback;
+	private CallbackContext context;
+	private Activity activity;
 	private Window window;
 	private View decorView;
 	
 	@Override
 	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException
 	{
-		callback = callbackContext;
-		window = cordova.getActivity().getWindow();
+		context = callbackContext;
+		activity = cordova.getActivity();
+		window = activity.getWindow();
 		decorView = window.getDecorView();
 		
 		if (ACTION_IS_SUPPORTED.equals(action))
@@ -48,10 +51,8 @@ public class FullScreenPlugin extends CordovaPlugin
 			return showSystemUI();
 		else if (ACTION_SHOW_UNDER_SYSTEM_UI.equals(action))
 			return showUnderSystemUI();
-		else if (ACTION_IMMERSIVE_MODE.equals(action) && args.length() == 0)
+		else if (ACTION_IMMERSIVE_MODE.equals(action))
 			return immersiveMode();
-		else if (ACTION_IMMERSIVE_MODE.equals(action) && args.length() > 0)
-			return immersiveMode(args.getBoolean(0));
 		
 		return false;
 	}
@@ -77,21 +78,28 @@ public class FullScreenPlugin extends CordovaPlugin
 	 */
 	protected boolean immersiveWidth()
 	{
-		try
+		activity.runOnUiThread(new Runnable()
 		{
-			Point outSize = new Point();
-			
-			decorView.getDisplay().getRealSize(outSize);
-			
-	        PluginResult res = new PluginResult(PluginResult.Status.OK, outSize.x);
-	        callback.sendPluginResult(res);
-			return true;
-		}
-		catch (Exception e)
-		{
-			callback.error(e.getMessage());
-			return false;
-		}
+			@Override
+			public void run() 
+			{
+				try
+				{
+					Point outSize = new Point();
+					
+					decorView.getDisplay().getRealSize(outSize);
+					
+			        PluginResult res = new PluginResult(PluginResult.Status.OK, outSize.x);
+			        context.sendPluginResult(res);
+				}
+				catch (Exception e)
+				{
+					context.error(e.getMessage());
+				}
+			}
+		});
+		
+		return true;
 	}
 	
 	/**
@@ -99,21 +107,28 @@ public class FullScreenPlugin extends CordovaPlugin
 	 */	
 	protected boolean immersiveHeight()
 	{
-		try
+		activity.runOnUiThread(new Runnable()
 		{
-			Point outSize = new Point();
-			
-			decorView.getDisplay().getRealSize(outSize);
-			
-	        PluginResult res = new PluginResult(PluginResult.Status.OK, outSize.y);
-	        callback.sendPluginResult(res);
-			return true;
-		}
-		catch (Exception e)
-		{
-			callback.error(e.getMessage());
-			return false;
-		}
+			@Override
+			public void run() 
+			{
+				try
+				{
+					Point outSize = new Point();
+					
+					decorView.getDisplay().getRealSize(outSize);
+					
+			        PluginResult res = new PluginResult(PluginResult.Status.OK, outSize.y);
+			        context.sendPluginResult(res);
+				}
+				catch (Exception e)
+				{
+					context.error(e.getMessage());
+				}
+			}
+		});
+        
+		return true;
 	}
 	
 	/**
@@ -123,27 +138,34 @@ public class FullScreenPlugin extends CordovaPlugin
 	{
 		if (!isSupported())
 		{
-			callback.error("Not supported");
+			context.error("Not supported");
 			return false;
 		}
 		
-		try
+		activity.runOnUiThread(new Runnable()
 		{
-			int uiOptions = 
-				View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-				| View.SYSTEM_UI_FLAG_FULLSCREEN;
-			
-			decorView.setOnSystemUiVisibilityChangeListener(null);
-			decorView.setSystemUiVisibility(uiOptions);
-			
-			callback.success();
-			return true;
-		}
-		catch (Exception e)
-		{
-			callback.error(e.getMessage());
-			return false;
-		}
+			@Override
+			public void run() 
+			{
+				try
+				{
+					int uiOptions = 
+						View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+						| View.SYSTEM_UI_FLAG_FULLSCREEN;
+					
+					decorView.setOnSystemUiVisibilityChangeListener(null);
+					decorView.setSystemUiVisibility(uiOptions);
+					
+					context.success();
+				}
+				catch (Exception e)
+				{
+					context.error(e.getMessage());
+				}
+			}
+		});
+		
+		return true;
 	}
 	
 	/**
@@ -153,32 +175,39 @@ public class FullScreenPlugin extends CordovaPlugin
 	{
 		if (!isSupported())
 		{
-			callback.error("Not supported");
+			context.error("Not supported");
 			return false;
 		}
 		
-		try
+		activity.runOnUiThread(new Runnable()
 		{
-			// Remove translucent theme from bars
-			
-			window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION | WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-	        
-	        // Update system UI
-	        
-			decorView.setOnSystemUiVisibilityChangeListener(null);
-			decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
-			
-			PluginResult res = new PluginResult(PluginResult.Status.OK, true);
-	        callback.sendPluginResult(res);
-			
-			callback.success();
-			return true;
-		}
-		catch (Exception e)
-		{
-			callback.error(e.getMessage());
-			return false;
-		}
+			@Override
+			public void run() 
+			{
+				try
+				{
+					// Remove translucent theme from bars
+					
+					window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION | WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+			        
+			        // Update system UI
+			        
+					decorView.setOnSystemUiVisibilityChangeListener(null);
+					decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+					
+					PluginResult res = new PluginResult(PluginResult.Status.OK, true);
+			        context.sendPluginResult(res);
+					
+					context.success();
+				}
+				catch (Exception e)
+				{
+					context.error(e.getMessage());
+				}
+			}
+		});			
+		
+		return true;
 	}
 	
 	/**
@@ -188,93 +217,92 @@ public class FullScreenPlugin extends CordovaPlugin
 	{
 		if (!isSupported())
 		{
-			callback.error("Not supported");
+			context.error("Not supported");
 			return false;
 		}
 		
-		try
+		activity.runOnUiThread(new Runnable()
 		{
-			// Make the status and nav bars translucent
-			
-	        window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-	        window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-	        
-	        // Extend view underneath status and nav bars
-			
-			int uiOptions = 
-				View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-				| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-				| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
-			
-			decorView.setOnSystemUiVisibilityChangeListener(null);
-			decorView.setSystemUiVisibility(uiOptions);
-			
-			callback.success();
-			return true;
-		}
-		catch (Exception e)
-		{
-			callback.error(e.getMessage());
-			return false;
-		}
+			@Override
+			public void run() 
+			{
+				try
+				{
+					// Make the status and nav bars translucent
+					
+			        window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+			        window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+			        
+			        // Extend view underneath status and nav bars
+					
+					int uiOptions = 
+						View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+						| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+						| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+					
+					decorView.setOnSystemUiVisibilityChangeListener(null);
+					decorView.setSystemUiVisibility(uiOptions);
+					
+					context.success();
+				}
+				catch (Exception e)
+				{
+					context.error(e.getMessage());
+				}
+			}
+		});
+		
+		return true;
 	}
 	
 	/**
-	 * Hide system UI and keep it hidden (Android 4.4+ only)
+	 * Hide system UI and switch to immersive mode (Android 4.4+ only)
 	 */
 	protected boolean immersiveMode()
 	{
-		return immersiveMode(true);
-	}
-	
-	/**
-	 * Hide system UI and keep it hidden (Android 4.4+ only)
-	 */
-	protected boolean immersiveMode(boolean isSticky)
-	{
 		if (!isImmersiveModeSupported())
 		{
-			callback.error("Not supported");
+			context.error("Not supported");
 			return false;
 		}
 		
-		try
+		activity.runOnUiThread(new Runnable()
 		{
-			int immersive = isSticky
-				? View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-				: View.SYSTEM_UI_FLAG_IMMERSIVE;
-			
-			final int uiOptions = 
-				View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-				| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-				| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-				| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-				| View.SYSTEM_UI_FLAG_FULLSCREEN
-				| immersive;
-			
-			decorView.setOnSystemUiVisibilityChangeListener(null);
-			decorView.setSystemUiVisibility(uiOptions);
-			
-			if (isSticky)
+			@Override
+			public void run() 
 			{
-				decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener()
+				try
 				{
-					@Override
-					public void onSystemUiVisibilityChange(int visibility) 
+					final int uiOptions = 
+						View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+						| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+						| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+						| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+						| View.SYSTEM_UI_FLAG_FULLSCREEN
+						| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+					
+					decorView.setOnSystemUiVisibilityChangeListener(null);
+					decorView.setSystemUiVisibility(uiOptions);
+					
+					decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener()
 					{
-						decorView.setSystemUiVisibility(uiOptions);
-					}
-				});
+						@Override
+						public void onSystemUiVisibilityChange(int visibility) 
+						{
+							decorView.setSystemUiVisibility(uiOptions);
+						}
+					});
+					
+					context.success();
+				}
+				catch (Exception e)
+				{
+					context.error(e.getMessage());
+				}
 			}
+		});
 			
-			callback.success();
-			return true;
-		}
-		catch (Exception e)
-		{
-			callback.error(e.getMessage());
-			return false;
-		}
+		return true;
 	}
 	
 }
