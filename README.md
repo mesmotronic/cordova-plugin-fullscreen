@@ -14,6 +14,17 @@ In Android 4.4+, however, you can now enter true full screem, fully interactive 
 
 If you find that the plugin doesn't work as you might like on a specific device or Android configuration you're using, don't forget that this project is open source, so feel free to fork the project and adapt it to work in any way you like!
 
+Installation
+------------
+
+**Cordova**
+
+`cordova plugin add https://github.com/mesmotronic/cordova-fullscreen-plugin.git`
+
+**PhoneGap**
+
+`phonegap local plugin add https://github.com/mesmotronic/cordova-fullscreen-plugin.git`
+
 
 Code example
 ------------
