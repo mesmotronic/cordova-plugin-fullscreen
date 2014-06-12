@@ -62,7 +62,11 @@ public class FullScreenPlugin extends CordovaPlugin
 	 */
 	protected boolean isSupported()
 	{
-		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH;
+		boolean supported = Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH;
+		
+        PluginResult res = new PluginResult(PluginResult.Status.OK, supported);
+        context.sendPluginResult(res);
+		return true;
 	}
 	
 	/**
@@ -70,7 +74,11 @@ public class FullScreenPlugin extends CordovaPlugin
 	 */
 	protected boolean isImmersiveModeSupported()
 	{
-		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+		boolean supported = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+		
+        PluginResult res = new PluginResult(PluginResult.Status.OK, supported);
+        context.sendPluginResult(res);
+		return true;
 	}
 	
 	/**
