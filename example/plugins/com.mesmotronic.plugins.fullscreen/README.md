@@ -25,10 +25,6 @@ Installation
 
 `phonegap local plugin add https://github.com/mesmotronic/cordova-fullscreen-plugin.git`
 
-Configuration
--------------
-
-If you are intending to use immersive mode, add `<preference name="Fullscreen" value="true" />` to your `config.xml` to ensure the status bar is hidden correctly.
 
 Code example
 ------------
@@ -73,7 +69,10 @@ AndroidFullScreen.showSystemUI(successFunction, errorFunction);
 AndroidFullScreen.showUnderSystemUI(successFunction, errorFunction);
 
 // Hide system UI and keep it hidden (Android 4.4+ only)
-AndroidFullScreen.immersiveMode(successFunction, errorFunction);
+AndroidFullScreen.immersiveMode(true, successFunction, errorFunction);
+
+// Hide system UI until user swipes from top (Android 4.4+ only)
+AndroidFullScreen.immersiveMode(false, successFunction, errorFunction);
 
 ```
 
