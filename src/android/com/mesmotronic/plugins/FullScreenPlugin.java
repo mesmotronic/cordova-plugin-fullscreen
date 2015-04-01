@@ -57,6 +57,17 @@ public class FullScreenPlugin extends CordovaPlugin
     return false;
   }
 
+  @Override
+  public void onResume(boolean multitasking) {
+    int flags = window.getAttributes().flags;
+    if ((flags & WindowManager.LayoutParams.FLAG_FULLSCREEN) != 0) {
+      immersiveMode();
+    }
+    if ((flags & WindowManager.LayoutParams.SYSTEM_UI_FLAG_FULLSCREEN) != 0) {
+      hideSystemUI();
+    }
+  }
+
   /**
    * Are any of the features of this plugin supported?
    */
@@ -196,7 +207,8 @@ public class FullScreenPlugin extends CordovaPlugin
         {
           // Remove translucent theme from bars
 
-          window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION | WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+          window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION | WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | WindowManager.LayoutParams.FLAG_FULLSCREEN);
+          window.setFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN, WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
 
               // Update system UI
 
@@ -281,6 +293,8 @@ public class FullScreenPlugin extends CordovaPlugin
       {
         try
         {
+          window.clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+          window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
           final int uiOptions =
             View.SYSTEM_UI_FLAG_LAYOUT_STABLE
             | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
