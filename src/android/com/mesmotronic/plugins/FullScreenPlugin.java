@@ -63,9 +63,6 @@ public class FullScreenPlugin extends CordovaPlugin
     if ((flags & WindowManager.LayoutParams.FLAG_FULLSCREEN) != 0) {
       immersiveMode();
     }
-    if ((flags & WindowManager.LayoutParams.SYSTEM_UI_FLAG_FULLSCREEN) != 0) {
-      hideSystemUI();
-    }
   }
 
   /**
