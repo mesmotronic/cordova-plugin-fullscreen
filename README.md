@@ -3,6 +3,8 @@ Full Screen Plugin for Cordova
 
 Plugin for Cordova (or PhoneGap) 3.0+ to enable true full screen on Android, ported from our popular [ANE for Adobe AIR](https://github.com/mesmotronic/air-fullscreen-ane).
 
+Released under BSD license; see LICENSE for details.
+
 How does it work?
 -----------------
 
@@ -85,8 +87,3 @@ Getting the immersive screen size
 ---------------------------------
 
 You can use the `immersiveWidth` and `immersiveHeight` methods to find out the dimensions of the screen with the system UI hidden, regardless of the current screen state.
-
-License
--------
-
-This project has been released under BSD license; see LICENSE for details.

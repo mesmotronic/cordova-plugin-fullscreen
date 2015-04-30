@@ -3,7 +3,7 @@
   xmlns="http://apache.org/cordova/ns/plugins/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android"
   id="com.mesmotronic.plugins.fullscreen"
-  version="0.9.0"
+  version="1.0.0"
   >
 
   <name>AndroidFullScreen</name>
