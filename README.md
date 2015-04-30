@@ -8,7 +8,7 @@ Released under BSD license; see LICENSE for details.
 How does it work?
 -----------------
 
-This plugin enables developers to offer users a true full screen experience in the Cordova and PhoneGap apps for Android.
+This plugin enables developers to offer users a true full screen experience in their Cordova and PhoneGap apps for Android.
 
 Using Android 4.0+, you can use true full screen in "lean mode", the way you see in apps like YouTube, expanding the app right to the edges of the screen, hiding the status and navigation bars until the user next interacts. This is ideally suited to video or cut-scene content.
 
@@ -26,11 +26,6 @@ Installation
 **PhoneGap**
 
 `phonegap local plugin add https://github.com/mesmotronic/cordova-fullscreen-plugin.git`
-
-Configuration
--------------
-
-If you are intending to use immersive mode, add `<preference name="Fullscreen" value="true" />` to your `config.xml` to ensure the status bar is hidden correctly.
 
 Code example
 ------------
