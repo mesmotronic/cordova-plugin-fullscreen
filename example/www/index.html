@@ -16,6 +16,7 @@
         
         button
         {
+			display: block;
         	width: 100%;
         	height: 42px;
         	margin-bottom: 4px;
@@ -24,11 +25,16 @@
         </style>
         
     </head>
+    
     <body>
-        <p>
-        	<button id="immersiveModeButton">Immersive Mode</button>
-        	<br/><button id="showUiButton">Show UI</button>
-        </p>
+    
+        <h1>Android 4.0+</h1>
+		<button id="leanModeButton">Lean Mode</button>
+		<button id="showUiButton">Show UI</button>
+		
+        <h1>Android 4.4+</h1>
+		<button id="immersiveModeButton">Immersive Mode</button>
+		<button id="showUnderUiButton">Show Under UI</button>
         
         <script type="text/javascript" src="cordova.js"></script>
         
@@ -36,7 +42,9 @@
         
             document.addEventListener('deviceready', function(event) 
             {
-            	var immersiveModeButton = document.getElementById('immersiveModeButton'),
+            	var leanModeButton = document.getElementById('leanModeButton'),
+					immersiveModeButton = document.getElementById('immersiveModeButton'),
+            		showUnderUiButton = document.getElementById('showUnderUiButton'),
             		showUiButton = document.getElementById('showUiButton');
             	
             	function successFunction()
@@ -54,17 +62,26 @@
             	    console.log(value);
             	}
             	
+            	leanModeButton.addEventListener('click', function(event)
+            	{
+            		AndroidFullScreen.leanMode(successFunction, errorFunction);
+            	});
+            	
             	immersiveModeButton.addEventListener('click', function(event)
             	{
             		AndroidFullScreen.immersiveMode(successFunction, errorFunction);
             	});
+            	
+            	showUnderUiButton.addEventListener('click', function(event)
+             	{
+             		AndroidFullScreen.showUnderSystemUI(successFunction, errorFunction);
+             	});
             	
             	showUiButton.addEventListener('click', function(event)
              	{
              		AndroidFullScreen.showSystemUI(successFunction, errorFunction);
              	});
             	
-            	AndroidFullScreen.immersiveMode(successFunction, errorFunction);
             });
             
         </script>

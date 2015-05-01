@@ -19,7 +19,7 @@ public class FullScreenPlugin extends CordovaPlugin
 	public static final String ACTION_IS_IMMERSIVE_MODE_SUPPORTED = "isImmersiveModeSupported";
 	public static final String ACTION_IMMERSIVE_WIDTH = "immersiveWidth";
 	public static final String ACTION_IMMERSIVE_HEIGHT = "immersiveHeight";
-	public static final String ACTION_HIDE_SYSTEM_UI = "hideSystemUI";
+	public static final String ACTION_HIDE_SYSTEM_UI = "leanMode";
 	public static final String ACTION_SHOW_SYSTEM_UI = "showSystemUI";
 	public static final String ACTION_SHOW_UNDER_SYSTEM_UI = "showUnderSystemUI";
 	public static final String ACTION_IMMERSIVE_MODE = "immersiveMode";
@@ -46,7 +46,7 @@ public class FullScreenPlugin extends CordovaPlugin
 		else if (ACTION_IMMERSIVE_HEIGHT.equals(action))
 			return immersiveHeight();
 		else if (ACTION_HIDE_SYSTEM_UI.equals(action))
-			return hideSystemUI();
+			return leanMode();
 		else if (ACTION_SHOW_SYSTEM_UI.equals(action))
 			return showSystemUI();
 		else if (ACTION_SHOW_UNDER_SYSTEM_UI.equals(action))
@@ -134,7 +134,7 @@ public class FullScreenPlugin extends CordovaPlugin
 	/**
 	 * Hide system UI until user interacts
 	 */
-	protected boolean hideSystemUI()
+	protected boolean leanMode()
 	{
 		if (!isSupported())
 		{

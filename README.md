@@ -61,7 +61,7 @@ AndroidFullScreen.immersiveWidth(trace, errorFunction);
 AndroidFullScreen.immersiveHeight(trace, errorFunction);
 
 // Hide system UI until user interacts
-AndroidFullScreen.hideSystemUI(successFunction, errorFunction);
+AndroidFullScreen.leanMode(successFunction, errorFunction);
 
 // Show system UI
 AndroidFullScreen.showSystemUI(successFunction, errorFunction);

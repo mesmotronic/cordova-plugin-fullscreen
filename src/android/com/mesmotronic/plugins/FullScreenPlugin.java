@@ -27,7 +27,7 @@ public class FullScreenPlugin extends CordovaPlugin
 	public static final String ACTION_IS_IMMERSIVE_MODE_SUPPORTED = "isImmersiveModeSupported";
 	public static final String ACTION_IMMERSIVE_WIDTH = "immersiveWidth";
 	public static final String ACTION_IMMERSIVE_HEIGHT = "immersiveHeight";
-	public static final String ACTION_HIDE_SYSTEM_UI = "hideSystemUI";
+	public static final String ACTION_LEAN_MODE = "leanMode";
 	public static final String ACTION_SHOW_SYSTEM_UI = "showSystemUI";
 	public static final String ACTION_SHOW_UNDER_SYSTEM_UI = "showUnderSystemUI";
 	public static final String ACTION_IMMERSIVE_MODE = "immersiveMode";
@@ -55,8 +55,8 @@ public class FullScreenPlugin extends CordovaPlugin
 			return immersiveWidth();
 		else if (ACTION_IMMERSIVE_HEIGHT.equals(action))
 			return immersiveHeight();
-		else if (ACTION_HIDE_SYSTEM_UI.equals(action))
-			return hideSystemUI();
+		else if (ACTION_LEAN_MODE.equals(action))
+			return leanMode();
 		else if (ACTION_SHOW_SYSTEM_UI.equals(action))
 			return showSystemUI();
 		else if (ACTION_SHOW_UNDER_SYSTEM_UI.equals(action))
@@ -171,7 +171,7 @@ public class FullScreenPlugin extends CordovaPlugin
 	/**
 	 * Hide system UI until user interacts
 	 */
-	protected boolean hideSystemUI()
+	protected boolean leanMode()
 	{
 		if (!isSupported())
 		{
@@ -191,8 +191,6 @@ public class FullScreenPlugin extends CordovaPlugin
 					int uiOptions = 
 						View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
 						| View.SYSTEM_UI_FLAG_FULLSCREEN;
-					
-					window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 					
 					decorView.setOnSystemUiVisibilityChangeListener(null);
 					decorView.setSystemUiVisibility(uiOptions);
@@ -287,10 +285,9 @@ public class FullScreenPlugin extends CordovaPlugin
 					
 					int uiOptions = 
 						View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-						| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-						| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+						| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
+						//| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
 					
-					decorView.setOnSystemUiVisibilityChangeListener(null);
 					decorView.setSystemUiVisibility(uiOptions);
 					
 					context.success();

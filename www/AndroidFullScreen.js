@@ -24,9 +24,9 @@
 			cordova.exec(successFunction, errorFunction, 'AndroidFullScreen', 'immersiveHeight', []);
 		},
 
-		hideSystemUI: function(successFunction, errorFunction)
+		leanMode: function(successFunction, errorFunction)
 		{
-			cordova.exec(successFunction, errorFunction, 'AndroidFullScreen', 'hideSystemUI', []);
+			cordova.exec(successFunction, errorFunction, 'AndroidFullScreen', 'leanMode', []);
 		},
 
 		showSystemUI: function(successFunction, errorFunction)
