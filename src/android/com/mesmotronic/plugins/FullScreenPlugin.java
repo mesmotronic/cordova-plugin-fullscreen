@@ -480,7 +480,7 @@ public class FullScreenPlugin extends CordovaPlugin
 						@Override
 						public boolean dispatchKeyEvent(KeyEvent event) 
 						{
-							return windowCallback.dispatchKeyShortcutEvent(event);
+							return windowCallback.dispatchKeyEvent(event);
 						}
 						
 						@Override
