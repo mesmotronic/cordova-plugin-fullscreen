@@ -1,0 +1,1 @@
+You need to install the plugin before running the example.
