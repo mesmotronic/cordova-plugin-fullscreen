@@ -27,6 +27,10 @@ Installation
 
 `phonegap local plugin add https://github.com/mesmotronic/cordova-fullscreen-plugin.git`
 
+**NPM**
+
+`npm install cordova-plugin-fullscreen`
+
 Note
 ----
 
