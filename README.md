@@ -31,10 +31,12 @@ Installation
 
 `npm install cordova-plugin-fullscreen`
 
-Note
-----
+Notes
+-----
 
 From version 1.0.2, the plugin ID has changed to `cordova-plugin-fullscreen` in line with the official Cordova plugin naming coventions following the switch to NPM. We therefore recommend that any previous version be uninstalled before upgrading to this release.
+
+From version 1.0.3, the plugin targets `android@5.0.0`, which requires API 23.
 
 Code example
 ------------

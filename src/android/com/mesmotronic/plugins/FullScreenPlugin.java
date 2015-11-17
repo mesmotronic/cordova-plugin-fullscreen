@@ -14,6 +14,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.SearchEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -359,6 +360,12 @@ public class FullScreenPlugin extends CordovaPlugin
 					window.setCallback(new Window.Callback()
 					{
 						@Override
+						public ActionMode onWindowStartingActionMode(Callback callback, int i)
+						{
+							return windowCallback.onWindowStartingActionMode(callback, i);
+						}
+						
+						@Override
 						public ActionMode onWindowStartingActionMode(Callback callback) 
 						{
 							return windowCallback.onWindowStartingActionMode(callback);
@@ -379,6 +386,12 @@ public class FullScreenPlugin extends CordovaPlugin
 						public void onWindowAttributesChanged(LayoutParams attrs) 
 						{
 							windowCallback.onWindowAttributesChanged(attrs);
+						}
+						
+						@Override
+						public boolean onSearchRequested(SearchEvent event) 
+						{
+							return windowCallback.onSearchRequested(event);
 						}
 						
 						@Override
@@ -480,7 +493,7 @@ public class FullScreenPlugin extends CordovaPlugin
 						@Override
 						public boolean dispatchKeyEvent(KeyEvent event) 
 						{
-							return windowCallback.dispatchKeyEvent(event);
+							return windowCallback.dispatchKeyShortcutEvent(event);
 						}
 						
 						@Override
