@@ -38,6 +38,8 @@ From version 1.0.2, the plugin ID has changed to `cordova-plugin-fullscreen` in 
 
 From version 1.0.3, the plugin targets `android@5.0.0`, which requires API 23.
 
+**IMPORTANT:** If you are targeting API <= 22, you should continue using version 1.0.2.
+
 Code example
 ------------
 
