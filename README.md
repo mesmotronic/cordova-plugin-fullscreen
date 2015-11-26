@@ -21,15 +21,11 @@ Installation
 
 **Cordova**
 
-`cordova plugin add https://github.com/mesmotronic/cordova-fullscreen-plugin.git`
+`cordova plugin add cordova-plugin-fullscreen`
 
 **PhoneGap**
 
-`phonegap local plugin add https://github.com/mesmotronic/cordova-fullscreen-plugin.git`
-
-**NPM**
-
-`npm install cordova-plugin-fullscreen`
+`phonegap local plugin add cordova-plugin-fullscreen`
 
 Notes
 -----
