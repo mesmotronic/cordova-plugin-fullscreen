@@ -1,4 +1,3 @@
-cordova.define("cordova-plugin-fullscreen.AndroidFullScreen", function(require, exports, module) {
 (function(window, undefined)
 {
 	'use strict';
@@ -58,5 +57,3 @@ cordova.define("cordova-plugin-fullscreen.AndroidFullScreen", function(require, 
 	});
 	
 })(window);
-
-});
