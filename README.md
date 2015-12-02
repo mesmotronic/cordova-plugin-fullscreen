@@ -32,7 +32,7 @@ Notes
 
 From version 1.0.2, the plugin ID has changed to `cordova-plugin-fullscreen` in line with the official Cordova plugin naming coventions following the switch to NPM. We therefore recommend that any previous version be uninstalled before upgrading to this release.
 
-From version 1.0.3, the plugin targets `android@5.0.0`, which requires API 23.
+Version 1.0.3 and newer target `android@5.0.0`, which requires API 23.
 
 **IMPORTANT:** If you are targeting API <= 22, you should continue using version 1.0.2.
 
@@ -44,12 +44,12 @@ Using the plugin in your app couldn't be easier:
 ```js
 function successFunction()
 {
-    console.log("It worked!");
+    console.info("It worked!");
 }
 
 function errorFunction(error)
 {
-    console.log(error);
+    console.error(error);
 }
 
 function trace(value)
@@ -74,6 +74,9 @@ AndroidFullScreen.leanMode(successFunction, errorFunction);
 
 // Show system UI
 AndroidFullScreen.showSystemUI(successFunction, errorFunction);
+
+// Extend your app underneath the status bar (Android 4.4+ only)
+AndroidFullScreen.showUnderStatusBar(successFunction, errorFunction);
 
 // Extend your app underneath the system UI (Android 4.4+ only)
 AndroidFullScreen.showUnderSystemUI(successFunction, errorFunction);

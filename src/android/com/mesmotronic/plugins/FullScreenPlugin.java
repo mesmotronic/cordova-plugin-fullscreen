@@ -30,6 +30,7 @@ public class FullScreenPlugin extends CordovaPlugin
 	public static final String ACTION_IMMERSIVE_HEIGHT = "immersiveHeight";
 	public static final String ACTION_LEAN_MODE = "leanMode";
 	public static final String ACTION_SHOW_SYSTEM_UI = "showSystemUI";
+	public static final String ACTION_SHOW_UNDER_STATUS_BAR = "showUnderStatusBar";
 	public static final String ACTION_SHOW_UNDER_SYSTEM_UI = "showUnderSystemUI";
 	public static final String ACTION_IMMERSIVE_MODE = "immersiveMode";
 	
@@ -60,6 +61,8 @@ public class FullScreenPlugin extends CordovaPlugin
 			return leanMode();
 		else if (ACTION_SHOW_SYSTEM_UI.equals(action))
 			return showSystemUI();
+		else if (ACTION_SHOW_UNDER_STATUS_BAR.equals(action))
+			return showUnderStatusBar();
 		else if (ACTION_SHOW_UNDER_SYSTEM_UI.equals(action))
 			return showUnderSystemUI();
 		else if (ACTION_IMMERSIVE_MODE.equals(action))
@@ -258,11 +261,55 @@ public class FullScreenPlugin extends CordovaPlugin
 	}
 	
 	/**
+	 * Extend your app underneath the status bar (Android 4.4+ only)
+	 */
+	protected boolean showUnderStatusBar()
+	{
+		if (!isImmersiveModeSupported())
+		{
+			context.error("Not supported");
+			return false;
+		}
+		
+		activity.runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run() 
+			{
+				try
+				{
+					resetWindow();
+					
+					// Make the status bar translucent
+					
+			        window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+			        
+			        // Extend view underneath status bar
+					
+					int uiOptions = 
+						View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+						| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+					
+					decorView.setSystemUiVisibility(uiOptions);
+					
+					context.success();
+				}
+				catch (Exception e)
+				{
+					context.error(e.getMessage());
+				}
+			}
+		});
+		
+		return true;
+	}
+	
+	/**
 	 * Extend your app underneath the system UI (Android 4.4+ only)
 	 */
 	protected boolean showUnderSystemUI()
 	{
-		if (!isSupported())
+		if (!isImmersiveModeSupported())
 		{
 			context.error("Not supported");
 			return false;
@@ -279,15 +326,14 @@ public class FullScreenPlugin extends CordovaPlugin
 					
 					// Make the status and nav bars translucent
 					
-			        window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-			        window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-			        
-			        // Extend view underneath status and nav bars
+					window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+					window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+					
+					// Extend view underneath status and nav bars
 					
 					int uiOptions = 
-						View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-						| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
-						//| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+							View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+							| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
 					
 					decorView.setSystemUiVisibility(uiOptions);
 					

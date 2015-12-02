@@ -1,3 +1,4 @@
+cordova.define("cordova-plugin-fullscreen.AndroidFullScreen", function(require, exports, module) {
 (function(window, undefined)
 {
 	'use strict';
@@ -34,6 +35,11 @@
 			cordova.exec(successFunction, errorFunction, 'AndroidFullScreen', 'showSystemUI', []);
 		},
 
+		showUnderStatusBar: function(successFunction, errorFunction)
+		{
+			cordova.exec(successFunction, errorFunction, 'AndroidFullScreen', 'showUnderStatusBar', []);
+		},
+		
 		showUnderSystemUI: function(successFunction, errorFunction)
 		{
 			cordova.exec(successFunction, errorFunction, 'AndroidFullScreen', 'showUnderSystemUI', []);
@@ -52,3 +58,5 @@
 	});
 	
 })(window);
+
+});
