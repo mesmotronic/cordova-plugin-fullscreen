@@ -34,8 +34,6 @@ public class FullScreenPlugin extends CordovaPlugin
 	public static final String ACTION_SHOW_UNDER_SYSTEM_UI = "showUnderSystemUI";
 	public static final String ACTION_IMMERSIVE_MODE = "immersiveMode";
 	
-	private static Window.Callback _windowCallback;
-	
 	private CallbackContext context;
 	private Activity activity;
 	private Window window;
@@ -73,12 +71,7 @@ public class FullScreenPlugin extends CordovaPlugin
 	
 	protected Window.Callback getWindowCallback()
 	{
-		if (_windowCallback == null)
-		{
-			_windowCallback = window.getCallback();
-		}
-		
-		return _windowCallback;
+		return window.getCallback();
 	}
 	
 	protected void resetWindow()
