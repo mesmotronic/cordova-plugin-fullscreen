@@ -9,18 +9,9 @@ import org.json.JSONException;
 import android.app.Activity;
 import android.graphics.Point;
 import android.os.Build;
-import android.view.ActionMode;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.SearchEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.ActionMode.Callback;
-import android.view.WindowManager.LayoutParams;
-import android.view.accessibility.AccessibilityEvent;
 
 public class FullScreenPlugin extends CordovaPlugin
 {
@@ -33,8 +24,6 @@ public class FullScreenPlugin extends CordovaPlugin
 	public static final String ACTION_SHOW_UNDER_STATUS_BAR = "showUnderStatusBar";
 	public static final String ACTION_SHOW_UNDER_SYSTEM_UI = "showUnderSystemUI";
 	public static final String ACTION_IMMERSIVE_MODE = "immersiveMode";
-	
-	private static Window.Callback _windowCallback;
 	
 	private CallbackContext context;
 	private Activity activity;
@@ -71,23 +60,12 @@ public class FullScreenPlugin extends CordovaPlugin
 		return false;
 	}
 	
-	protected Window.Callback getWindowCallback()
-	{
-		if (_windowCallback == null)
-		{
-			_windowCallback = window.getCallback();
-		}
-		
-		return _windowCallback;
-	}
-	
 	protected void resetWindow()
 	{
 		decorView.setOnFocusChangeListener(null); 
 		decorView.setOnSystemUiVisibilityChangeListener(null);
 		
 		window.clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
-		window.setCallback(getWindowCallback());
 	}
 	
 	/**
@@ -398,154 +376,6 @@ public class FullScreenPlugin extends CordovaPlugin
 						public void onSystemUiVisibilityChange(int visibility) 
 						{
 							decorView.setSystemUiVisibility(uiOptions);
-						}
-					});					
-					
-					final Window.Callback windowCallback = getWindowCallback();
-					
-					window.setCallback(new Window.Callback()
-					{
-						@Override
-						public ActionMode onWindowStartingActionMode(Callback callback, int i)
-						{
-							return windowCallback.onWindowStartingActionMode(callback, i);
-						}
-						
-						@Override
-						public ActionMode onWindowStartingActionMode(Callback callback) 
-						{
-							return windowCallback.onWindowStartingActionMode(callback);
-						}
-						
-						@Override
-						public void onWindowFocusChanged(boolean hasFocus) 
-						{
-							if (hasFocus)
-							{
-								decorView.setSystemUiVisibility(uiOptions);
-							}
-							
-							windowCallback.onWindowFocusChanged(hasFocus);
-						}
-						
-						@Override
-						public void onWindowAttributesChanged(LayoutParams attrs) 
-						{
-							windowCallback.onWindowAttributesChanged(attrs);
-						}
-						
-						@Override
-						public boolean onSearchRequested(SearchEvent event) 
-						{
-							return windowCallback.onSearchRequested(event);
-						}
-						
-						@Override
-						public boolean onSearchRequested() 
-						{
-							return windowCallback.onSearchRequested();
-						}
-						
-						@Override
-						public boolean onPreparePanel(int featureId, View view, Menu menu) 
-						{
-							return windowCallback.onPreparePanel(featureId, view, menu);
-						}
-						
-						@Override
-						public void onPanelClosed(int featureId, Menu menu)
-						{
-							windowCallback.onPanelClosed(featureId, menu);
-						}
-						
-						@Override
-						public boolean onMenuOpened(int featureId, Menu menu) 
-						{
-							return windowCallback.onMenuOpened(featureId, menu);
-						}
-						
-						@Override
-						public boolean onMenuItemSelected(int featureId, MenuItem item) 
-						{
-							return windowCallback.onMenuItemSelected(featureId, item);
-						}
-						
-						@Override
-						public void onDetachedFromWindow() 
-						{
-							windowCallback.onDetachedFromWindow();
-						}
-						
-						@Override
-						public View onCreatePanelView(int featureId) 
-						{
-							return windowCallback.onCreatePanelView(featureId);
-						}
-						
-						@Override
-						public boolean onCreatePanelMenu(int featureId, Menu menu) 
-						{
-							return windowCallback.onCreatePanelMenu(featureId, menu);
-						}
-						
-						@Override
-						public void onContentChanged()
-						{
-							windowCallback.onContentChanged();
-						}
-						
-						@Override
-						public void onAttachedToWindow() 
-						{
-							windowCallback.onAttachedToWindow();
-						}
-						
-						@Override
-						public void onActionModeStarted(ActionMode mode)
-						{
-							windowCallback.onActionModeStarted(mode);
-						}
-						
-						@Override
-						public void onActionModeFinished(ActionMode mode) 
-						{
-							windowCallback.onActionModeFinished(mode);
-						}
-						
-						@Override
-						public boolean dispatchTrackballEvent(MotionEvent event) 
-						{
-							return windowCallback.dispatchTrackballEvent(event);
-						}
-						
-						@Override
-						public boolean dispatchTouchEvent(MotionEvent event) 
-						{
-							return windowCallback.dispatchTouchEvent(event);
-						}
-						
-						@Override
-						public boolean dispatchPopulateAccessibilityEvent(AccessibilityEvent event) 
-						{
-							return windowCallback.dispatchPopulateAccessibilityEvent(event);
-						}
-						
-						@Override
-						public boolean dispatchKeyShortcutEvent(KeyEvent event) 
-						{
-							return windowCallback.dispatchKeyShortcutEvent(event);
-						}
-						
-						@Override
-						public boolean dispatchKeyEvent(KeyEvent event) 
-						{
-							return windowCallback.dispatchKeyEvent(event);
-						}
-						
-						@Override
-						public boolean dispatchGenericMotionEvent(MotionEvent event) 
-						{
-							return windowCallback.dispatchGenericMotionEvent(event);
 						}
 					});
 					

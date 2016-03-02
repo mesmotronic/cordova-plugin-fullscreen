@@ -34,18 +34,18 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   xmlns="http://apache.org/cordova/ns/plugins/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android"
   id="cordova-plugin-fullscreen"
-  version="1.0.8"
+  version="1.1.0"
   >
 
   <name>cordova-plugin-fullscreen</name>
-  <description>Plugin for Cordova (or PhoneGap) 3.0+ to enable true full screen on Android devices using lean and immersive modes</description>
-  <keywords>cordova,android,fullscreen,lean,immersive</keywords>
+  <description>Plugin for Cordova (or PhoneGap) 5.0+ to enable true full screen on Android devices using lean and immersive modes</description>
+  <keywords>cordova,android,fullscreen,lean,immersive,statusbar</keywords>
   <repo>https://github.com/mesmotronic/cordova-fullscreen-plugin.git</repo>
 
   <license>BSD</license>
 
   <engines>
-    <engine name="cordova" version=">=3.0.0" />
+    <engine name="cordova" version=">=5.0.0" />
   </engines>
 
   <js-module 
