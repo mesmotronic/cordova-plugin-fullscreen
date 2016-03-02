@@ -1,7 +1,7 @@
 Full Screen Plugin for Cordova
 ==============================
 
-Plugin for Cordova (or PhoneGap) 5.0+ to enable true full screen on Android devices using lean and immersive modes, ported from our popular [ANE for Adobe AIR](https://github.com/mesmotronic/air-ane-fullscreen).
+Plugin for Cordova (or PhoneGap) 3.0+ to enable true full screen on Android devices using lean and immersive modes, ported from our popular [ANE for Adobe AIR](https://github.com/mesmotronic/air-ane-fullscreen).
 
 Released under BSD license; see LICENSE for details.
 
@@ -32,11 +32,7 @@ Notes
 
 From version 1.0.2, the plugin ID has changed to `cordova-plugin-fullscreen` in line with the official Cordova plugin naming coventions following the switch to NPM. We therefore recommend that any previous version be uninstalled before upgrading to this release.
 
-Version 1.0.3 and newer target `android@5.0.0`, which requires API 23.
-
 Since the release of `android@5.0.0`, setting `<preference name="Fullscreen" value="true" />` in `config.xml` will use immersive mode, where available, even without this plugin.
-
-**IMPORTANT:** If you are targeting API <= 22 you should continue using version 1.0.2.
 
 Code example
 ------------
