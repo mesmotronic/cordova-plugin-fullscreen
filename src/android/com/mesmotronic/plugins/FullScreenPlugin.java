@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.graphics.Color;
+import android.os.Handler;
 
 public class FullScreenPlugin extends CordovaPlugin
 {
@@ -32,6 +33,14 @@ public class FullScreenPlugin extends CordovaPlugin
 	private Activity activity;
 	private Window window;
 	private View decorView;
+	private int mLastSystemUIVisibility = 0;
+	private final Handler mLeanBackHandler = new Handler();
+	private final Runnable mEnterLeanback = new Runnable() {
+	    @Override
+	    public void run() {
+	        leanMode();
+	    }
+	};
 	
 	/**
      * Sets the context of the Command. This can then be used to do things like
@@ -41,7 +50,7 @@ public class FullScreenPlugin extends CordovaPlugin
      * @param webView The CordovaWebView Cordova is running in.
      */
     @Override
-    public void initialize(final CordovaInterface cordova, CordovaWebView webView) {
+    public void initialize(final CordovaInterface cordova, final CordovaWebView webView) {
         super.initialize(cordova, webView);
 
         this.cordova.getActivity().runOnUiThread(new Runnable() {
@@ -205,7 +214,20 @@ public class FullScreenPlugin extends CordovaPlugin
 			            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
 			            | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
 					
-					decorView.setOnSystemUiVisibilityChangeListener(null);
+					mLastSystemUIVisibility = uiOptions;
+					decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener()
+					{
+						@Override
+						public void onSystemUiVisibilityChange(int visibility) 
+						{
+							if((mLastSystemUIVisibility & View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) != 0
+                 					&& (visibility & View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == 0) {
+        						resetHideTimer();
+    						}
+    						mLastSystemUIVisibility = visibility;
+						}
+					});
+
 					decorView.setSystemUiVisibility(uiOptions);
 					
 					context.success();
@@ -218,6 +240,13 @@ public class FullScreenPlugin extends CordovaPlugin
 		});
 		
 		return true;
+	}
+
+	private void resetHideTimer() {
+	    // First cancel any queued events - i.e. resetting the countdown clock
+	    mLeanBackHandler.removeCallbacks(mEnterLeanback);
+	    // And fire the event in 3s time
+	    mLeanBackHandler.postDelayed(mEnterLeanback, 3000);
 	}
 	
 	/**
