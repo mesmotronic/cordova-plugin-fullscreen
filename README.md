@@ -56,7 +56,7 @@ function trace(value)
 }
 
 // Is this plugin supported?
-AndroidFullScreen.isSupported();
+AndroidFullScreen.isSupported(supportedFunction, errorFunction);
 
 // Is immersive mode supported?
 AndroidFullScreen.isImmersiveModeSupported(successFunction, errorFunction);
