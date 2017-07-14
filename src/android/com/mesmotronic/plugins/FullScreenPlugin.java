@@ -77,7 +77,7 @@ public class FullScreenPlugin extends CordovaPlugin
 		
         PluginResult res = new PluginResult(PluginResult.Status.OK, supported);
         context.sendPluginResult(res);
-		return true;
+		return supported;
 	}
 	
 	/**
@@ -89,7 +89,7 @@ public class FullScreenPlugin extends CordovaPlugin
 		
         PluginResult res = new PluginResult(PluginResult.Status.OK, supported);
         context.sendPluginResult(res);
-		return true;
+		return supported;
 	}
 	
 	/**
