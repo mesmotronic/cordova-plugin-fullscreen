@@ -39,59 +39,54 @@
         
         <script type="text/javascript" src="cordova.js"></script>
         
-        <script type="text/javascript">
-        
-            document.addEventListener('deviceready', function(event) 
-            {
-            	var leanModeButton = document.getElementById('leanModeButton'),
-					immersiveModeButton = document.getElementById('immersiveModeButton'),
-            		showUnderUiButton = document.getElementById('showUnderUiButton'),
-            		showUiButton = document.getElementById('showUiButton'),
-            		customButton = document.getElementById('showUiButton')
-            		;
-            	
-            	function successFunction()
-            	{
-            	    console.log("It worked!");
-            	}
+		<script type="text/javascript">
+		
+		   	function successFunction()
+		   	{
+		   		console.log("It worked!");
+		   	}
 
-            	function errorFunction(error)
-            	{
-            	    console.log(error);
-            	}
-				
-            	function trace(value)
-            	{
-            	    console.log(value);
-            	}
-            	
-            	leanModeButton.addEventListener('click', function(event)
-            	{
-            		AndroidFullScreen.leanMode(successFunction, errorFunction);
-            	});
-            	
-            	immersiveModeButton.addEventListener('click', function(event)
-            	{
-            		AndroidFullScreen.immersiveMode(successFunction, errorFunction);
-            	});
-            	
-            	showUnderUiButton.addEventListener('click', function(event)
-             	{
-             		AndroidFullScreen.showUnderSystemUI(successFunction, errorFunction);
-             	});
-            	
-            	showUiButton.addEventListener('click', function(event)
-             	{
-             		AndroidFullScreen.showSystemUI(successFunction, errorFunction);
-             	});
-            	
-            	customButton.addEventListener('click', function(event)
-             	{
-            		AndroidFullScreen.setSystemUiVisibility(AndroidFullScreen.SYSTEM_UI_FLAG_FULLSCREEN | AndroidFullScreen.SYSTEM_UI_FLAG_LOW_PROFILE, successFunction, errorFunction);
-             	});
-            	
-            });
-            
-        </script>
+		   	function errorFunction(error)
+		   	{
+		   		console.error(error);
+		   	}
+		   	
+		   	function leanMode()
+		   	{
+		   		AndroidFullScreen.leanMode(successFunction, errorFunction);
+		   	}
+		   	
+		   	function immersiveMode()
+		   	{
+		   		AndroidFullScreen.immersiveMode(successFunction, errorFunction);
+		   	}
+		   	
+		   	function showUnderSystemUI()
+		   	{
+		   		AndroidFullScreen.showUnderSystemUI(successFunction, errorFunction);
+		   	}
+		   	
+		   	function showSystemUI()
+		   	{
+		   		AndroidFullScreen.showSystemUI(successFunction, errorFunction);
+		   	}
+		   	
+		   	function setSystemUiVisibility()
+		   	{
+		  		AndroidFullScreen.setSystemUiVisibility(AndroidFullScreen.SYSTEM_UI_FLAG_FULLSCREEN | AndroidFullScreen.SYSTEM_UI_FLAG_LOW_PROFILE, successFunction, errorFunction);
+		   	}
+			
+		   	function deviceReady()
+		   	{
+				document.getElementById('leanModeButton').addEventListener('click', leanMode);
+				document.getElementById('immersiveModeButton').addEventListener('click', immersiveMode)
+				document.getElementById('showUnderUiButton').addEventListener('click', showUnderSystemUI);
+				document.getElementById('showUiButton').addEventListener('click', showSystemUI);
+				document.getElementById('customButton').addEventListener('click', setSystemUiVisibility);
+		   	}
+		   	
+			document.addEventListener('deviceready', deviceReady);
+			
+		</script>
     </body>
 </html>

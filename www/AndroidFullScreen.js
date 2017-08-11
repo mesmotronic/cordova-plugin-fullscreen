@@ -61,7 +61,6 @@
 		},
 		
 		/**
-		 * Proxy for Android's setSystemUiVisibility method
 		 * @see	https://developer.android.com/reference/android/view/View.html#setSystemUiVisibility(int)
 		 */
 		setSystemUiVisibility: function(visibility, successFunction, errorFunction)

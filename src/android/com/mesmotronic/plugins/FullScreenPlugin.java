@@ -456,6 +456,12 @@ public class FullScreenPlugin extends CordovaPlugin
 	
 	protected boolean setSystemUiVisibility(final int visibility)
 	{
+		if (!isSupported())
+		{
+			context.error("Not supported");
+			return false;
+		}
+		
 		activity.runOnUiThread(new Runnable()
 		{
 			@Override
