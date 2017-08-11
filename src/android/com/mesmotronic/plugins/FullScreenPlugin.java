@@ -28,6 +28,7 @@ public class FullScreenPlugin extends CordovaPlugin
 	public static final String ACTION_SHOW_UNDER_STATUS_BAR = "showUnderStatusBar";
 	public static final String ACTION_SHOW_UNDER_SYSTEM_UI = "showUnderSystemUI";
 	public static final String ACTION_IMMERSIVE_MODE = "immersiveMode";
+	public static final String ACTION_SET_SYSTEM_UI_VISIBILITY = "setSystemUiVisibility";
 	
 	private CallbackContext context;
 	private Activity activity;
@@ -93,6 +94,8 @@ public class FullScreenPlugin extends CordovaPlugin
 			return showUnderSystemUI();
 		else if (ACTION_IMMERSIVE_MODE.equals(action))
 			return immersiveMode();
+		else if (ACTION_SET_SYSTEM_UI_VISIBILITY.equals(action))
+			return setSystemUiVisibility(args.getInt(0));
 		
 		return false;
 	}
@@ -450,7 +453,30 @@ public class FullScreenPlugin extends CordovaPlugin
 			
 		return true;
 	}
-
+	
+	protected boolean setSystemUiVisibility(int visibility)
+	{
+		activity.runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run() 
+			{
+				try
+				{
+					resetWindow();
+					decorView.setSystemUiVisibility(visibility);
+					context.success();
+				}
+				catch (Exception e)
+				{
+					context.error(e.getMessage());
+				}
+			}
+		});
+		
+		return true;
+	}
+	
 	private void setStatusBarBackgroundColor(final String colorPref) {
         if (Build.VERSION.SDK_INT >= 21) {
             if (colorPref != null && !colorPref.isEmpty()) {
