@@ -31,6 +31,7 @@
         <h1>Android 4.0+</h1>
 		<button id="leanModeButton">Lean Mode</button>
 		<button id="showUiButton">Show UI</button>
+		<button id="customButton">Custom Mode</button>
 		
         <h1>Android 4.4+</h1>
 		<button id="immersiveModeButton">Immersive Mode</button>
@@ -45,7 +46,9 @@
             	var leanModeButton = document.getElementById('leanModeButton'),
 					immersiveModeButton = document.getElementById('immersiveModeButton'),
             		showUnderUiButton = document.getElementById('showUnderUiButton'),
-            		showUiButton = document.getElementById('showUiButton');
+            		showUiButton = document.getElementById('showUiButton'),
+            		customButton = document.getElementById('showUiButton')
+            		;
             	
             	function successFunction()
             	{
@@ -80,6 +83,11 @@
             	showUiButton.addEventListener('click', function(event)
              	{
              		AndroidFullScreen.showSystemUI(successFunction, errorFunction);
+             	});
+            	
+            	customButton.addEventListener('click', function(event)
+             	{
+            		AndroidFullScreen.setSystemUiVisibility(AndroidFullScreen.SYSTEM_UI_FLAG_FULLSCREEN | AndroidFullScreen.SYSTEM_UI_FLAG_LOW_PROFILE, successFunction, errorFunction);
              	});
             	
             });

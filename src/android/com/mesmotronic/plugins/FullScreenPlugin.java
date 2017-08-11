@@ -454,7 +454,7 @@ public class FullScreenPlugin extends CordovaPlugin
 		return true;
 	}
 	
-	protected boolean setSystemUiVisibility(int visibility)
+	protected boolean setSystemUiVisibility(final int visibility)
 	{
 		activity.runOnUiThread(new Runnable()
 		{
