@@ -52,11 +52,11 @@ function errorFunction(error)
 
 function trace(value)
 {
-	console.log(value);
+    console.log(value);
 }
 
 // Is this plugin supported?
-AndroidFullScreen.isSupported(supportedFunction, errorFunction);
+AndroidFullScreen.isSupported(successFunction, errorFunction);
 
 // Is immersive mode supported?
 AndroidFullScreen.isImmersiveModeSupported(successFunction, errorFunction);
@@ -85,8 +85,6 @@ AndroidFullScreen.immersiveMode(successFunction, errorFunction);
 // Custom full screen mode
 // See https://developer.android.com/reference/android/view/View.html#setSystemUiVisibility(int)
 AndroidFullScreen.setSystemUiVisibility(AndroidFullScreen.SYSTEM_UI_FLAG_FULLSCREEN | AndroidFullScreen.SYSTEM_UI_FLAG_LOW_PROFILE, successFunction, errorFunction);
-
-
 ```
 
 All methods will call the successFunction callback if the action was successful and the errorFunction if it wasn't (or isn't supported); if you're using the plugin in an app for a platform other than Android, all methods will fail.
