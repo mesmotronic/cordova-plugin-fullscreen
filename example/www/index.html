@@ -36,11 +36,13 @@
         <h1>Android 4.4+</h1>
 		<button id="immersiveModeButton">Immersive Mode</button>
 		<button id="showUnderUiButton">Show Under UI</button>
+		<button id="immersiveWidthButton">Immersive Width</button>
+		<button id="immersiveHeightButton">Immersive Height</button>
         
         <script type="text/javascript" src="cordova.js"></script>
         
 		<script type="text/javascript">
-		
+
 		   	function successFunction()
 		   	{
 		   		console.log("It worked!");
@@ -50,6 +52,11 @@
 		   	{
 		   		console.error(error);
 		   	}
+		
+			function trace(value)
+			{
+				alert(value);
+			}
 		   	
 		   	function leanMode()
 		   	{
@@ -59,6 +66,16 @@
 		   	function immersiveMode()
 		   	{
 		   		AndroidFullScreen.immersiveMode(successFunction, errorFunction);
+		   	}
+		   	
+		   	function immersiveWidth()
+		   	{
+		   		AndroidFullScreen.immersiveWidth(trace, errorFunction);
+		   	}
+		   	
+		   	function immersiveHeight()
+		   	{
+		   		AndroidFullScreen.immersiveHeight(trace, errorFunction);
 		   	}
 		   	
 		   	function showUnderSystemUI()
@@ -75,11 +92,13 @@
 		   	{
 		  		AndroidFullScreen.setSystemUiVisibility(AndroidFullScreen.SYSTEM_UI_FLAG_FULLSCREEN | AndroidFullScreen.SYSTEM_UI_FLAG_LOW_PROFILE, successFunction, errorFunction);
 		   	}
-			
+
 		   	function deviceReady()
 		   	{
 				document.getElementById('leanModeButton').addEventListener('click', leanMode);
 				document.getElementById('immersiveModeButton').addEventListener('click', immersiveMode)
+				document.getElementById('immersiveWidthButton').addEventListener('click', immersiveWidth)
+				document.getElementById('immersiveHeightButton').addEventListener('click', immersiveHeight)
 				document.getElementById('showUnderUiButton').addEventListener('click', showUnderSystemUI);
 				document.getElementById('showUiButton').addEventListener('click', showSystemUI);
 				document.getElementById('customButton').addEventListener('click', setSystemUiVisibility);
