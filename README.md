@@ -95,3 +95,10 @@ Getting the immersive screen size
 ---------------------------------
 
 You can use the `immersiveWidth` and `immersiveHeight` methods to find out the dimensions of the screen with the system UI hidden, regardless of the current screen state.
+
+Make a donation
+---------------
+
+If you find this project useful, why not buy us a coffee (or as many as you think it's worth)?
+
+[![Make a donation](https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=onlinepayment@mesmotronic.com&item_name=Donation+to+open+source+(Cordova+fullscreen+plugin)&currency_code=GBP)
