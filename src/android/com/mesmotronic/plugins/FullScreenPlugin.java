@@ -360,8 +360,7 @@ public class FullScreenPlugin extends CordovaPlugin
 			{
 				try
 				{
-			        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-					
+					decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
 					context.success();
 				}
 				catch (Exception e)
