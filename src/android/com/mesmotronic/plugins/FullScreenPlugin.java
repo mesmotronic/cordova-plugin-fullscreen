@@ -360,7 +360,7 @@ public class FullScreenPlugin extends CordovaPlugin
 			{
 				try
 				{
-					resetWindow();
+			        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 					
 					context.success();
 				}
