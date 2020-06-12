@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-Copyright (c) 2015, Mesmotronic Limited
+Copyright (c) 2020, Mesmotronic Limited
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
@@ -34,7 +34,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   xmlns="http://apache.org/cordova/ns/plugins/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android"
   id="cordova-plugin-fullscreen"
-  version="1.1.0"
+  version="1.2.1"
   >
 
   <name>cordova-plugin-fullscreen</name>
