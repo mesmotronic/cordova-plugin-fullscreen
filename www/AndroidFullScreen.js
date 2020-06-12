@@ -19,6 +19,11 @@
 		{
 			cordova.exec(successFunction, errorFunction, 'AndroidFullScreen', 'isSupported', []);
 		},
+			
+		resetScreen: function(successFunction, errorFunction)
+		{
+			cordova.exec(successFunction, errorFunction, 'AndroidFullScreen', 'resetScreen', []);
+		},
 
 		isImmersiveModeSupported: function(successFunction, errorFunction)
 		{

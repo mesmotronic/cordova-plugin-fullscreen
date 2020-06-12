@@ -29,6 +29,7 @@ public class FullScreenPlugin extends CordovaPlugin
 	public static final String ACTION_SHOW_UNDER_SYSTEM_UI = "showUnderSystemUI";
 	public static final String ACTION_IMMERSIVE_MODE = "immersiveMode";
 	public static final String ACTION_SET_SYSTEM_UI_VISIBILITY = "setSystemUiVisibility";
+	public static final String ACTION_RESET_WINDOW = "resetScreen";
 	
 	private CallbackContext context;
 	private Activity activity;
@@ -96,6 +97,8 @@ public class FullScreenPlugin extends CordovaPlugin
 			return immersiveMode();
 		else if (ACTION_SET_SYSTEM_UI_VISIBILITY.equals(action))
 			return setSystemUiVisibility(args.getInt(0));
+		else if (ACTION_RESET_WINDOW.equals(action))
+			return resetScreen();
 		
 		return false;
 	}
@@ -329,10 +332,35 @@ public class FullScreenPlugin extends CordovaPlugin
 					
 					int uiOptions = 
 						View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-						| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+							| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
 					
 					decorView.setSystemUiVisibility(uiOptions);
 					
+					context.success();
+				}
+				catch (Exception e)
+				{
+					context.error(e.getMessage());
+				}
+			}
+		});
+		
+		return true;
+	}
+
+	/**
+	 * Undo the effect of any of the other methods of this plugin
+	 */
+	protected boolean resetScreen()
+	{
+		activity.runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run() 
+			{
+				try
+				{
+					decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
 					context.success();
 				}
 				catch (Exception e)
