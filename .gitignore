@@ -4,3 +4,6 @@
 /src/bin
 /src/.classpath
 /src/.project
+package-lock.json
+node_modules
+.gradle

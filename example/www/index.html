@@ -9,11 +9,17 @@
         <style type="text/css">
         body, html
         {
-        	margin: 4px;
+        	margin: 0;
         	padding: 0;
         	position: relative;
         }
         
+		body
+		{
+			margin: 20px;
+			background-color: lightslategrey;
+		}
+
         button
         {
 			display: block;
@@ -32,6 +38,7 @@
 		<button id="leanModeButton">Lean Mode</button>
 		<button id="showUiButton">Show UI</button>
 		<button id="customButton">Custom Mode</button>
+		<!-- <button id="resetButton">Reset Screen</button> -->
 		
         <h1>Android 4.4+</h1>
 		<button id="immersiveModeButton">Immersive Mode</button>
@@ -93,6 +100,11 @@
 		  		AndroidFullScreen.setSystemUiVisibility(AndroidFullScreen.SYSTEM_UI_FLAG_FULLSCREEN | AndroidFullScreen.SYSTEM_UI_FLAG_LOW_PROFILE, successFunction, errorFunction);
 		   	}
 
+			function resetScreen()
+			{
+				AndroidFullScreen.resetScreen();
+			}
+
 		   	function deviceReady()
 		   	{
 				document.getElementById('leanModeButton').addEventListener('click', leanMode);
@@ -102,6 +114,7 @@
 				document.getElementById('showUnderUiButton').addEventListener('click', showUnderSystemUI);
 				document.getElementById('showUiButton').addEventListener('click', showSystemUI);
 				document.getElementById('customButton').addEventListener('click', setSystemUiVisibility);
+				// document.getElementById('resetButton').addEventListener('click', resetScreen);
 		   	}
 		   	
 			document.addEventListener('deviceready', deviceReady);
